@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		A5240F3D1CBCE6A100807076 /* SelectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5240F3C1CBCE6A100807076 /* SelectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5240F471CBD00F100807076 /* TDSelectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5240F451CBD00F100807076 /* TDSelectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5240F481CBD00F100807076 /* TDSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5240F461CBD00F100807076 /* TDSelectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A5240F391CBCE6A100807076 /* SelectionViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SelectionViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5240F3C1CBCE6A100807076 /* SelectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
 		A5240F3E1CBCE6A100807076 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5240F451CBD00F100807076 /* TDSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSelectionViewController.h; sourceTree = "<group>"; };
+		A5240F461CBD00F100807076 /* TDSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSelectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,9 +51,19 @@
 			isa = PBXGroup;
 			children = (
 				A5240F3C1CBCE6A100807076 /* SelectionViewController.h */,
+				A5240F441CBD00F100807076 /* Classes */,
 				A5240F3E1CBCE6A100807076 /* Info.plist */,
 			);
 			path = SelectionViewController;
+			sourceTree = "<group>";
+		};
+		A5240F441CBD00F100807076 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A5240F451CBD00F100807076 /* TDSelectionViewController.h */,
+				A5240F461CBD00F100807076 /* TDSelectionViewController.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,6 +73,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5240F471CBD00F100807076 /* TDSelectionViewController.h in Headers */,
 				A5240F3D1CBCE6A100807076 /* SelectionViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5240F481CBD00F100807076 /* TDSelectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
