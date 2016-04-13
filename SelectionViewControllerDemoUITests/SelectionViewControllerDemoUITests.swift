@@ -28,9 +28,51 @@ class SelectionViewControllerDemoUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testSingleSelection() {
+        let app = XCUIApplication()
+        let table = app.tables
+        
+        let selectionTypeCell = table.childrenMatchingType(.Cell).elementBoundByIndex(0)
+        selectionTypeCell.tap()
+        
+        let newTable = app.tables.elementBoundByIndex(1)
+        
+        // test can select only one value
+        
+        // test can deselect value
+        
+        // test done registers selection
+        
+        // test cancel doesn't alter selection
+        
+        // test re-presenting pre-selects the correct cell
     }
     
+    func testSingleSelectionRequired() {
+        
+    }
+    
+    func testSingleSectionedSelection() {
+        
+    }
+    
+    func testSingleSectionedSelectionRequired() {
+        
+    }
+    
+    func testMultipleSelection() {
+        
+    }
+    
+    func testMultipleSelectionRequired() {
+        
+    }
+    
+    func testMultipleSectionedSelection() {
+        
+    }
+    
+    func testMultipleSectionedSelectionRequired() {
+        
+    }
 }
