@@ -13,10 +13,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     if (self.selectedKeys == nil) {
         self.selectedKeys = [NSMutableSet set];
     }
+    
+    // reset the selection type to assign the allowsMultipleSelection
+    self.selectionType = self.selectionType;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -31,11 +34,6 @@
             if (selectedPath) {
                 [self.tableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             }
-        }
-        
-        if (self.selectionType == SelectionTypeSingle && self.selectedKeys.count == 1) {
-            NSIndexPath *selectedPath = [self indexPathForKey:[self.selectedKeys anyObject]];
-            currentSingleSelection = selectedPath;
         }
     }
 }
@@ -58,26 +56,6 @@
     self.sortedOptionKeys = orderedOptions;
     self.options = options;
     self.optionDetails = details;
-}
-
--(void)dismissSelectionViewController:(id)sender
-{
-    
-    BOOL validSelection = self.selectedKeys.count > 0;
-    
-    if (self.requiresSelection && validSelection) {
-        
-        UIAlertController *alert = [[UIAlertController alloc] init];
-        alert.title = nil;
-        alert.message = @"Please make a selection";
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
-        
-        [self presentViewController:alert animated:true completion:nil];
-        
-        return;
-    } else {
-        [self.delegate selectionViewControllerRequestsDismissal:self];
-    }
 }
 
 -(void)cancelSelectionViewController:(id)sender
@@ -163,32 +141,29 @@
 // Ensures the checkmarks are correctly displays and updates the users choices
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (currentSingleSelection != nil) {
-        if (currentSingleSelection.row == indexPath.row && currentSingleSelection.section == indexPath.section && !self.requiresSelection) {
-            // clear the current selection to be none
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            // manually send the delegate message as it doesn't get called when deselecting programmatically
-            [tableView.delegate tableView:tableView didDeselectRowAtIndexPath:currentSingleSelection];
-            
-            currentSingleSelection = nil;
-            
-            return;
-        }
+    // clear this re-selection
+    id  selectedKey = self.sortedOptionKeys[indexPath.section][indexPath.row];
+    
+    if ([self.selectedKeys containsObject:selectedKey] && !self.requiresSelection) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        // manually send the delegate message as it doesn't get called when deselecting programmatically
+        [tableView.delegate tableView:tableView didDeselectRowAtIndexPath:indexPath];
+        return;
+    }
+    
+    // if self.requiresSelection => should not be able to deselect - only allow user to deselect this choice by selecting another
+    
+    // if self.selected keys doesn't contain this key, this is a new selection. Continue below to conditionally deselect other elements
+    
+    // Perform any deselection
+    if (self.selectionType == SelectionTypeSingle) {
+        // other deselection is taken care of in tableView:didDeselectRowAtIndexPath: which is called as tableView.allowsMultipleSelection == false
     }
     
     if (self.selectionType == SelectionTypeSingleSectioned) {
         
-        // clear this re-selection
-        id  selectedKey = self.sortedOptionKeys[indexPath.section][indexPath.row];
+        // clear an old value in this section manually as tableView.allowsMultipleSelection == true to allow selection in multiple sections
         
-        if ([self.selectedKeys containsObject:selectedKey] && !self.requiresSelection) {
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            // manually send the delegate message as it doesn't get called when deselecting programmatically
-            [tableView.delegate tableView:tableView didDeselectRowAtIndexPath:indexPath];
-            return;
-        }
-        
-        // clear an old value in this section.
         // use a copy of the selected keys as this will change with any deselections
         NSSet *previousKeys = [self.selectedKeys copy];
         
@@ -203,30 +178,14 @@
                 [tableView.delegate tableView:tableView didDeselectRowAtIndexPath:selectedPath];
             }
         }
-        
     }
     
     if (self.selectionType == SelectionTypeMultiple) {
-        // clear this re-selection
-        id  selectedKey = self.sortedOptionKeys[indexPath.section][indexPath.row];
-        
-        if ([self.selectedKeys containsObject:selectedKey]) {
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            // manually send the delegate message as it doesn't get called when deselecting programmatically
-            [tableView.delegate tableView:tableView didDeselectRowAtIndexPath:indexPath];
-            return;
-        }
+        // any number of selections can be made
     }
     
-    // Clear other selections if not multi-select
-    if (self.selectionType == SelectionTypeSingle) {
-        if (currentSingleSelection != nil) {
-            [tableView deselectRowAtIndexPath:currentSingleSelection animated:YES];
-            // manually send the delegate message as it doesn't get called when deselecting programmatically
-            [tableView.delegate tableView:tableView didDeselectRowAtIndexPath:currentSingleSelection];
-        }
-        
-        currentSingleSelection = indexPath;
+    if (self.selectionType == SelectionTypeMultipleSectioned) {
+        // any number of selections can be made
     }
     
     [self.selectedKeys addObject:[self keyForIndexPath:indexPath]];
@@ -234,9 +193,6 @@
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UITableViewCell *deselectedCell = [tableView cellForRowAtIndexPath:indexPath];
-//    deselectedCell.selected = false;
-    
     [self.selectedKeys removeObject:[self keyForIndexPath:indexPath]];
 }
 

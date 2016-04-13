@@ -10,7 +10,48 @@
 		A5240F3D1CBCE6A100807076 /* SelectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5240F3C1CBCE6A100807076 /* SelectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5240F471CBD00F100807076 /* TDSelectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5240F451CBD00F100807076 /* TDSelectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5240F481CBD00F100807076 /* TDSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5240F461CBD00F100807076 /* TDSelectionViewController.m */; };
+		A5C228531CBE3A9C00CD65EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228521CBE3A9C00CD65EC /* AppDelegate.swift */; };
+		A5C228551CBE3A9C00CD65EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228541CBE3A9C00CD65EC /* ViewController.swift */; };
+		A5C228581CBE3A9C00CD65EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5C228561CBE3A9C00CD65EC /* Main.storyboard */; };
+		A5C2285A1CBE3A9C00CD65EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C228591CBE3A9C00CD65EC /* Assets.xcassets */; };
+		A5C2285D1CBE3A9C00CD65EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5C2285B1CBE3A9C00CD65EC /* LaunchScreen.storyboard */; };
+		A5C228681CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228671CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.swift */; };
+		A5C228701CBE3DB000CD65EC /* SelectionViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5240F391CBCE6A100807076 /* SelectionViewController.framework */; };
+		A5C228711CBE3DB000CD65EC /* SelectionViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5240F391CBCE6A100807076 /* SelectionViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5C228761CBE40E400CD65EC /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228751CBE40E400CD65EC /* SelectionTableViewCell.swift */; };
+		A5C228781CBE4FAE00CD65EC /* TDSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228771CBE4FAE00CD65EC /* TDSelectionViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A5C228641CBE3A9C00CD65EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5240F301CBCE6A100807076 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5C2284F1CBE3A9C00CD65EC;
+			remoteInfo = SelectionViewControllerDemo;
+		};
+		A5C228721CBE3DB000CD65EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5240F301CBCE6A100807076 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5240F381CBCE6A100807076;
+			remoteInfo = SelectionViewController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A5C228741CBE3DB000CD65EC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A5C228711CBE3DB000CD65EC /* SelectionViewController.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A5240F391CBCE6A100807076 /* SelectionViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SelectionViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -18,10 +59,37 @@
 		A5240F3E1CBCE6A100807076 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5240F451CBD00F100807076 /* TDSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSelectionViewController.h; sourceTree = "<group>"; };
 		A5240F461CBD00F100807076 /* TDSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSelectionViewController.m; sourceTree = "<group>"; };
+		A5C228501CBE3A9C00CD65EC /* SelectionViewControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelectionViewControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5C228521CBE3A9C00CD65EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A5C228541CBE3A9C00CD65EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A5C228571CBE3A9C00CD65EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A5C228591CBE3A9C00CD65EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A5C2285C1CBE3A9C00CD65EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A5C2285E1CBE3A9C00CD65EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5C228631CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelectionViewControllerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5C228671CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewControllerDemoUITests.swift; sourceTree = "<group>"; };
+		A5C228691CBE3A9C00CD65EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5C228751CBE40E400CD65EC /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
+		A5C228771CBE4FAE00CD65EC /* TDSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDSelectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A5240F351CBCE6A100807076 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5C2284D1CBE3A9C00CD65EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5C228701CBE3DB000CD65EC /* SelectionViewController.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5C228601CBE3A9C00CD65EC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				A5240F3B1CBCE6A100807076 /* SelectionViewController */,
+				A5C228511CBE3A9C00CD65EC /* SelectionViewControllerDemo */,
+				A5C228661CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests */,
 				A5240F3A1CBCE6A100807076 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				A5240F391CBCE6A100807076 /* SelectionViewController.framework */,
+				A5C228501CBE3A9C00CD65EC /* SelectionViewControllerDemo.app */,
+				A5C228631CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,8 +134,32 @@
 			children = (
 				A5240F451CBD00F100807076 /* TDSelectionViewController.h */,
 				A5240F461CBD00F100807076 /* TDSelectionViewController.m */,
+				A5C228771CBE4FAE00CD65EC /* TDSelectionViewController.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		A5C228511CBE3A9C00CD65EC /* SelectionViewControllerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				A5C228521CBE3A9C00CD65EC /* AppDelegate.swift */,
+				A5C228541CBE3A9C00CD65EC /* ViewController.swift */,
+				A5C228751CBE40E400CD65EC /* SelectionTableViewCell.swift */,
+				A5C228561CBE3A9C00CD65EC /* Main.storyboard */,
+				A5C228591CBE3A9C00CD65EC /* Assets.xcassets */,
+				A5C2285B1CBE3A9C00CD65EC /* LaunchScreen.storyboard */,
+				A5C2285E1CBE3A9C00CD65EC /* Info.plist */,
+			);
+			path = SelectionViewControllerDemo;
+			sourceTree = "<group>";
+		};
+		A5C228661CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A5C228671CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.swift */,
+				A5C228691CBE3A9C00CD65EC /* Info.plist */,
+			);
+			path = SelectionViewControllerDemoUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,17 +195,62 @@
 			productReference = A5240F391CBCE6A100807076 /* SelectionViewController.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		A5C2284F1CBE3A9C00CD65EC /* SelectionViewControllerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5C2286E1CBE3A9C00CD65EC /* Build configuration list for PBXNativeTarget "SelectionViewControllerDemo" */;
+			buildPhases = (
+				A5C2284C1CBE3A9C00CD65EC /* Sources */,
+				A5C2284D1CBE3A9C00CD65EC /* Frameworks */,
+				A5C2284E1CBE3A9C00CD65EC /* Resources */,
+				A5C228741CBE3DB000CD65EC /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5C228731CBE3DB000CD65EC /* PBXTargetDependency */,
+			);
+			name = SelectionViewControllerDemo;
+			productName = SelectionViewControllerDemo;
+			productReference = A5C228501CBE3A9C00CD65EC /* SelectionViewControllerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A5C228621CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5C2286F1CBE3A9C00CD65EC /* Build configuration list for PBXNativeTarget "SelectionViewControllerDemoUITests" */;
+			buildPhases = (
+				A5C2285F1CBE3A9C00CD65EC /* Sources */,
+				A5C228601CBE3A9C00CD65EC /* Frameworks */,
+				A5C228611CBE3A9C00CD65EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5C228651CBE3A9C00CD65EC /* PBXTargetDependency */,
+			);
+			name = SelectionViewControllerDemoUITests;
+			productName = SelectionViewControllerDemoUITests;
+			productReference = A5C228631CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		A5240F301CBCE6A100807076 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "The Distance";
 				TargetAttributes = {
 					A5240F381CBCE6A100807076 = {
 						CreatedOnToolsVersion = 7.3;
+					};
+					A5C2284F1CBE3A9C00CD65EC = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					A5C228621CBE3A9C00CD65EC = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = A5C2284F1CBE3A9C00CD65EC;
 					};
 				};
 			};
@@ -119,6 +260,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = A5240F2F1CBCE6A100807076;
 			productRefGroup = A5240F3A1CBCE6A100807076 /* Products */;
@@ -126,12 +268,31 @@
 			projectRoot = "";
 			targets = (
 				A5240F381CBCE6A100807076 /* SelectionViewController */,
+				A5C2284F1CBE3A9C00CD65EC /* SelectionViewControllerDemo */,
+				A5C228621CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A5240F371CBCE6A100807076 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5C2284E1CBE3A9C00CD65EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5C2285D1CBE3A9C00CD65EC /* LaunchScreen.storyboard in Resources */,
+				A5C2285A1CBE3A9C00CD65EC /* Assets.xcassets in Resources */,
+				A5C228581CBE3A9C00CD65EC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5C228611CBE3A9C00CD65EC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -146,10 +307,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5240F481CBD00F100807076 /* TDSelectionViewController.m in Sources */,
+				A5C228781CBE4FAE00CD65EC /* TDSelectionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5C2284C1CBE3A9C00CD65EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5C228761CBE40E400CD65EC /* SelectionTableViewCell.swift in Sources */,
+				A5C228551CBE3A9C00CD65EC /* ViewController.swift in Sources */,
+				A5C228531CBE3A9C00CD65EC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5C2285F1CBE3A9C00CD65EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5C228681CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A5C228651CBE3A9C00CD65EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5C2284F1CBE3A9C00CD65EC /* SelectionViewControllerDemo */;
+			targetProxy = A5C228641CBE3A9C00CD65EC /* PBXContainerItemProxy */;
+		};
+		A5C228731CBE3DB000CD65EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5240F381CBCE6A100807076 /* SelectionViewController */;
+			targetProxy = A5C228721CBE3DB000CD65EC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A5C228561CBE3A9C00CD65EC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5C228571CBE3A9C00CD65EC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A5C2285B1CBE3A9C00CD65EC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5C2285C1CBE3A9C00CD65EC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A5240F3F1CBCE6A100807076 /* Debug */ = {
@@ -246,32 +458,87 @@
 		A5240F421CBCE6A100807076 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 2016.04.13;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 0.1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SelectionViewController/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.thedistance.SelectionViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		A5240F431CBCE6A100807076 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 2016.04.13;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 0.1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SelectionViewController/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.thedistance.SelectionViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A5C2286A1CBE3A9C00CD65EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = SelectionViewControllerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.thedistance.SelectionViewControllerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A5C2286B1CBE3A9C00CD65EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = SelectionViewControllerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.thedistance.SelectionViewControllerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A5C2286C1CBE3A9C00CD65EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SelectionViewControllerDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.thedistance.SelectionViewControllerDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SelectionViewControllerDemo;
+			};
+			name = Debug;
+		};
+		A5C2286D1CBE3A9C00CD65EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SelectionViewControllerDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.thedistance.SelectionViewControllerDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SelectionViewControllerDemo;
 			};
 			name = Release;
 		};
@@ -292,6 +559,23 @@
 			buildConfigurations = (
 				A5240F421CBCE6A100807076 /* Debug */,
 				A5240F431CBCE6A100807076 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5C2286E1CBE3A9C00CD65EC /* Build configuration list for PBXNativeTarget "SelectionViewControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5C2286A1CBE3A9C00CD65EC /* Debug */,
+				A5C2286B1CBE3A9C00CD65EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A5C2286F1CBE3A9C00CD65EC /* Build configuration list for PBXNativeTarget "SelectionViewControllerDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5C2286C1CBE3A9C00CD65EC /* Debug */,
+				A5C2286D1CBE3A9C00CD65EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

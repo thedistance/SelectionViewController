@@ -55,7 +55,7 @@ typedef NS_ENUM(NSUInteger, SelectionType) {
 @interface TDSelectionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     /// Used to track the current selection so that if multiple selections aren't allowed, the previous selection has its selection accessory checkmark removed.
-    NSIndexPath *currentSingleSelection;
+    // NSIndexPath *currentSingleSelection;
 }
 
 /// Determines the auto-deselection behaviour.
@@ -83,9 +83,6 @@ typedef NS_ENUM(NSUInteger, SelectionType) {
 
 /// If an option's key has a value in this dictionary, that value is set as the detailTextLabel text. The values should thus be NSStrings.
 @property (strong, nonatomic) NSDictionary * _Nullable optionDetails;
-
-/// Checks whether the view can be dismissed based on the `requiresSelectionProperty`. If it can dismissal is requested from the delegate.
--(IBAction)dismissSelectionViewController:(id _Nullable)sender;
 
 /// Asks for cancellation from the delegate. No selection checking is done as it is assumed the previous selection is retained.
 -(IBAction)cancelSelectionViewController:(id _Nullable)sender;
