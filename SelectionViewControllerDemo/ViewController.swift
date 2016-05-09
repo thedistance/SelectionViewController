@@ -134,7 +134,15 @@ extension ViewController {
         
         return cell!
     }
-    
-    
 }
 
+class SelectionViewController: TDSelectionViewController {
+    
+    @IBAction override func cancelSelectionViewController(sender: AnyObject?) {
+        super.cancelSelectionViewController(sender)
+    }
+    
+    @IBAction override func dismissSelectionViewController(sender: AnyObject?) {
+        super.dismissSelectionViewController(sender)
+    }
+}

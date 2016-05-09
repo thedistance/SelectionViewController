@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 The Distance. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @class TDSelectionViewController;
 
@@ -64,7 +64,7 @@ typedef NS_ENUM(NSUInteger, SelectionType) {
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 /// Dictionary representing the options the user can choose from. The keys are ids used in the code, and will be passed back to the delegate as the selections parameter in the `selectionViewController:requestsDismissalWithSelections:` method. The values should be NSStrings representing the description to be displayed to the user. Setting this property automatically sets the sortedOptionKeys property using the compare: selector if sortedOptionKeys has not been set.
-@property (nonatomic, strong) NSDictionary<id, NSString *> * _Nullable options;
+@property (nonatomic, strong) NSDictionary * _Nullable options;
 
 /// The titles to use for the section in the selection view.
 @property (nonatomic, strong) NSArray<NSString *> * _Nullable sectionTitles;

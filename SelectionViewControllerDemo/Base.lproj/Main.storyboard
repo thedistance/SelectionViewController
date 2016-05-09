@@ -69,7 +69,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Detail" textLabel="8kg-PT-bwX" detailTextLabel="bys-bc-lho" style="IBUITableViewCellStyleValue1" id="Zxa-wb-3Bq" customClass="SelectionTableViewCell" customModule="SelectionViewControllerDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Detail" textLabel="8kg-PT-bwX" detailTextLabel="bys-bc-lho" style="IBUITableViewCellStyleValue1" id="Zxa-wb-3Bq" customClass="SelectionTableViewCell" customModule="SelectionViewController">
                                         <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zxa-wb-3Bq" id="0RP-ON-Cim">
@@ -97,7 +97,7 @@
                                             <outlet property="titleLabel" destination="8kg-PT-bwX" id="3hZ-8A-vq7"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Basic" textLabel="4Tw-g1-X6c" style="IBUITableViewCellStyleDefault" id="OBd-61-D45" customClass="SelectionTableViewCell" customModule="SelectionViewControllerDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Basic" textLabel="4Tw-g1-X6c" style="IBUITableViewCellStyleDefault" id="OBd-61-D45" customClass="SelectionTableViewCell" customModule="SelectionViewController">
                                         <rect key="frame" x="0.0" y="158" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OBd-61-D45" id="sgd-ao-S9b">
