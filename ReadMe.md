@@ -13,7 +13,7 @@ Customisable Multi-Select UIViewController for iOS.
 * [x] Required Selection
 * [x] Configurable UI
 
-![Selection Overview](./docs/Resources/Images/SelectionOverview.png)
+![Selection Overview](https://raw.githubusercontent.com/thedistance/SelectionViewController/gh-pages/Images/SelectionOverview.png)
 
 *Simple form showing sections of options with extra details and multiple selections.*
 
@@ -117,9 +117,9 @@ If the selection criteria are not met by the user an alert is shown from the `di
 
 This repo contains a simple demo that shows the features of this library.
 
-![Demo Start](./docs/Resources/Images/DemoStart.png)
-![Selection Overview](./docs/Resources/Images/SelectionOverview.png)
-![Demo End](./docs/Resources/Images/DemoEnd.png)
+![Demo Start](https://raw.githubusercontent.com/thedistance/SelectionViewController/gh-pages/Images/DemoStart.png)
+![Selection Overview](https://raw.githubusercontent.com/thedistance/SelectionViewController/gh-pages/Images/SelectionOverview.png)
+![Demo End](https://raw.githubusercontent.com/thedistance/SelectionViewController/gh-pages/Images/DemoEnd.png)
 
 ## Communication
 
