@@ -3,7 +3,7 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)
 
-Customisable Multi-select UIViewController for iOS.
+Customisable Multi-Select UIViewController for iOS.
 
 ## Features
 
@@ -16,6 +16,10 @@ Customisable Multi-select UIViewController for iOS.
 ![Selection Overview](./docs/Resources/Images/SelectionOverview.png)
 
 *Simple form showing sections of options with extra details and multiple selections.*
+
+### Documentation
+
+We normally use [Jazzy](https://github.com/realm/jazzy) to generate our documentation, but as this project is currently a mix of Objective C and Swift our [SelectionViewController Documentation](http://thedistance.github.io/SelectionViewController/) is generated using a combination of jazzy and headerdocs. We will update our docs as and when mixed projects are supported by jazzy.
 
 ## Requirements
 
@@ -122,4 +126,4 @@ This repo contains a simple demo that shows the features of this library.
 - If you have **found a bug**, open an issue.
 - If you have **a feature request**, open an issue.
 - If you **want to contribute**, submit a pull request.
-- If you'd like to **ask a general question**, email us on <hello+keyboardresponder@thedistance.co.uk>.
+- If you'd like to **ask a general question**, email us on <hello+selectionviewcontroller@thedistance.co.uk>.
