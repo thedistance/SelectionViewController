@@ -3,7 +3,7 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)
 
-Simple multi select View Controller for iOS.
+Customisable Multi-select UIViewController for iOS.
 
 ## Features
 

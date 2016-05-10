@@ -1,0 +1,4 @@
+[submodule "docs"]
+	path = docs
+	url = git@github.com:thedistance/SelectionViewController.git
+	branch = gh-pages
