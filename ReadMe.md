@@ -12,14 +12,11 @@ Customisable Multi-Select UIViewController for iOS.
 * [x] Sectioned Selection
 * [x] Required Selection
 * [x] Configurable UI
+* [x] [Documentation](https://thedistance.github.io/SelectionViewController)
 
 ![Selection Overview](https://raw.githubusercontent.com/thedistance/SelectionViewController/gh-pages/Images/SelectionOverview.png)
 
 *Simple form showing sections of options with extra details and multiple selections.*
-
-### Documentation
-
-We normally use [Jazzy](https://github.com/realm/jazzy) to generate our documentation, but as this project is currently a mix of Objective C and Swift our [SelectionViewController Documentation](http://thedistance.github.io/SelectionViewController/) is generated using a combination of jazzy and headerdocs. We will update our docs as and when mixed projects are supported by jazzy.
 
 ## Requirements
 

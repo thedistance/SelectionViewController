@@ -58,6 +58,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
     /// The current selections made by the user. These should be stored as the keys from the `options` and `optionKeys`. Selections can be pre-specified by the presenter as this property updates the selected rows in `tableView` on `viewWillAppear:`.
     public var selectedKeys = [NSObject]()
     
+    /// Updates properties.
     public override func viewDidLoad() {
         super.viewDidLoad()
         
