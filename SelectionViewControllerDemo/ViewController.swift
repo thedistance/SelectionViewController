@@ -12,15 +12,17 @@ import SelectionViewController
 extension SelectionType {
     
     var description:String {
-        switch self {
-        case .Single:
+        
+        if self == .Single {
             return "Single"
-        case .SingleSectioned:
+        } else if self == .SingleSectioned {
             return "Single Sectioned"
-        case .Multiple:
+        } else if self == .Multiple {
             return "Multiple"
-        case .MultipleSectioned:
+        } else if self == .MultipleSectioned {
             return "Multiple Sectioned"
+        } else {
+            return "Enum"
         }
     }
     
@@ -35,7 +37,7 @@ class ViewController: UITableViewController {
                    "CB":"Choice B",
                    "CC":"Choice C"]
     
-    let order = [["OA", "OB", "OC"], ["CA", "CB", "CC"]]
+    let order:[[NSObject]] = [["OA", "OB", "OC"], ["CA", "CB", "CC"]]
     
     let details = ["OB": "Extras", "CA": "Extras"]
     
@@ -51,7 +53,7 @@ class ViewController: UITableViewController {
         true
     ]
     
-    var selections = [NSIndexPath: Set<String>]()
+    var selections = [NSIndexPath: [NSObject]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,17 +66,17 @@ class ViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let selectionVC = (segue.destinationViewController as? UINavigationController)?.topViewController as? TDSelectionViewController {
+        if let selectionVC = (segue.destinationViewController as? UINavigationController)?.topViewController as? SelectionViewController {
             
-            selectionVC.setOptions(options, withDetails: details, orderedAs: order)
-            selectionVC.sectionTitles = ["Options", "Choices"]
+            selectionVC.setOptions(options, withDetails: details, sectionTitles: ["Options", "Choices"], orderedAs: order)
+            
             selectionVC.title = "Choose an option"
             selectionVC.delegate = self
             
             if let indexPath = tableView.indexPathForSelectedRow {
                 
                 if let s = selections[indexPath] {
-                    selectionVC.selectedKeys = NSMutableSet(set: s)
+                    selectionVC.selectedKeys = s
                 }
                 
                 selectionVC.selectionType = selectionTypes[indexPath.row]
@@ -87,17 +89,20 @@ class ViewController: UITableViewController {
     
 }
 
-extension ViewController: TDSelectionViewControllerDelegate {
+
+extension ViewController: SelectionViewControllerDelegate {
     
-    func selectionViewControllerRequestsCancel(selectionVC: TDSelectionViewController) {
+    
+    
+    func selectionViewControllerRequestsCancel(selectionVC: SelectionViewController) {
         selectionVC.performSegueWithIdentifier("unwindHome", sender: self)
     }
     
-    func selectionViewControllerRequestsDismissal(selectionVC: TDSelectionViewController) {
+    func selectionViewControllerRequestsDismissal(selectionVC: SelectionViewController) {
         
         if let sp = tableView.indexPathForSelectedRow {
             
-            let selected = Set(selectionVC.selectedKeys.allObjects.flatMap { $0 as? String })
+            let selected = selectionVC.selectedKeys
             
             selections[sp] = selected.count > 0 ? selected : nil
             tableView.reloadRowsAtIndexPaths([sp], withRowAnimation: .Automatic)
@@ -128,15 +133,15 @@ extension ViewController {
         cell?.textLabel?.text = "Selection: \(selectionTypes[indexPath.row].description)"
         
         cell?.detailTextLabel?.text = selections[indexPath]?
+            .flatMap { $0 as? String }
             .flatMap { options[$0] }
             .joinWithSeparator(", ") ?? "No Selection"
-        
         
         return cell!
     }
 }
 
-class SelectionViewController: TDSelectionViewController {
+class DemoSelectionViewController: SelectionViewController {
     
     @IBAction override func cancelSelectionViewController(sender: AnyObject?) {
         super.cancelSelectionViewController(sender)

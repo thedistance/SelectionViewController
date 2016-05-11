@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		A51F9FA51CE09FB000D56F28 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F9FA41CE09FB000D56F28 /* SelectionTableViewCell.swift */; };
 		A5240F3D1CBCE6A100807076 /* SelectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5240F3C1CBCE6A100807076 /* SelectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5240F471CBD00F100807076 /* TDSelectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5240F451CBD00F100807076 /* TDSelectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5240F481CBD00F100807076 /* TDSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5240F461CBD00F100807076 /* TDSelectionViewController.m */; };
+		A57B1A061CE387AF000985EB /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1A051CE387AF000985EB /* SelectionViewController.swift */; };
+		A57B1A081CE387B8000985EB /* SelectionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1A071CE387B8000985EB /* SelectionViewControllerDelegate.swift */; };
+		A57B1A0A1CE387C4000985EB /* SelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1A091CE387C4000985EB /* SelectionCell.swift */; };
 		A5C228531CBE3A9C00CD65EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228521CBE3A9C00CD65EC /* AppDelegate.swift */; };
 		A5C228551CBE3A9C00CD65EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228541CBE3A9C00CD65EC /* ViewController.swift */; };
 		A5C228581CBE3A9C00CD65EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5C228561CBE3A9C00CD65EC /* Main.storyboard */; };
@@ -19,7 +20,7 @@
 		A5C228681CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228671CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.swift */; };
 		A5C228701CBE3DB000CD65EC /* SelectionViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5240F391CBCE6A100807076 /* SelectionViewController.framework */; };
 		A5C228711CBE3DB000CD65EC /* SelectionViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5240F391CBCE6A100807076 /* SelectionViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5C228781CBE4FAE00CD65EC /* TDSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228771CBE4FAE00CD65EC /* TDSelectionViewController.swift */; };
+		A5C228781CBE4FAE00CD65EC /* SelectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C228771CBE4FAE00CD65EC /* SelectionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,9 @@
 		A5240F3E1CBCE6A100807076 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5240F451CBD00F100807076 /* TDSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSelectionViewController.h; sourceTree = "<group>"; };
 		A5240F461CBD00F100807076 /* TDSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSelectionViewController.m; sourceTree = "<group>"; };
+		A57B1A051CE387AF000985EB /* SelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		A57B1A071CE387B8000985EB /* SelectionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewControllerDelegate.swift; sourceTree = "<group>"; };
+		A57B1A091CE387C4000985EB /* SelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionCell.swift; sourceTree = "<group>"; };
 		A5C228501CBE3A9C00CD65EC /* SelectionViewControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelectionViewControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C228521CBE3A9C00CD65EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5C228541CBE3A9C00CD65EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +74,7 @@
 		A5C228631CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelectionViewControllerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C228671CBE3A9C00CD65EC /* SelectionViewControllerDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewControllerDemoUITests.swift; sourceTree = "<group>"; };
 		A5C228691CBE3A9C00CD65EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5C228771CBE4FAE00CD65EC /* TDSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDSelectionViewController.swift; sourceTree = "<group>"; };
+		A5C228771CBE4FAE00CD65EC /* SelectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +138,10 @@
 			children = (
 				A5240F451CBD00F100807076 /* TDSelectionViewController.h */,
 				A5240F461CBD00F100807076 /* TDSelectionViewController.m */,
-				A5C228771CBE4FAE00CD65EC /* TDSelectionViewController.swift */,
+				A57B1A051CE387AF000985EB /* SelectionViewController.swift */,
+				A5C228771CBE4FAE00CD65EC /* SelectionType.swift */,
+				A57B1A071CE387B8000985EB /* SelectionViewControllerDelegate.swift */,
+				A57B1A091CE387C4000985EB /* SelectionCell.swift */,
 				A51F9FA41CE09FB000D56F28 /* SelectionTableViewCell.swift */,
 			);
 			path = Classes;
@@ -169,7 +176,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5240F471CBD00F100807076 /* TDSelectionViewController.h in Headers */,
 				A5240F3D1CBCE6A100807076 /* SelectionViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,9 +312,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A57B1A081CE387B8000985EB /* SelectionViewControllerDelegate.swift in Sources */,
 				A51F9FA51CE09FB000D56F28 /* SelectionTableViewCell.swift in Sources */,
-				A5240F481CBD00F100807076 /* TDSelectionViewController.m in Sources */,
-				A5C228781CBE4FAE00CD65EC /* TDSelectionViewController.swift in Sources */,
+				A57B1A0A1CE387C4000985EB /* SelectionCell.swift in Sources */,
+				A57B1A061CE387AF000985EB /* SelectionViewController.swift in Sources */,
+				A5C228781CBE4FAE00CD65EC /* SelectionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

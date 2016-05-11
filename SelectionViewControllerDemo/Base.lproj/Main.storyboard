@@ -53,10 +53,10 @@
             </objects>
             <point key="canvasLocation" x="888" y="449"/>
         </scene>
-        <!--Selection View Controller-->
+        <!--Demo Selection View Controller-->
         <scene sceneID="n2t-gC-sha">
             <objects>
-                <viewController id="0nb-Mw-cvI" customClass="SelectionViewController" customModule="SelectionViewControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0nb-Mw-cvI" customClass="DemoSelectionViewController" customModule="SelectionViewControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s7O-Bh-q5u"/>
                         <viewControllerLayoutGuide type="bottom" id="ejx-Ac-6x8"/>
