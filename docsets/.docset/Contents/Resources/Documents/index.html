@@ -129,7 +129,7 @@
 </code></pre>
 <a href='#getting_started' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='getting_started'>Getting Started</h3>
 
-<p>When you want to show the selection, instantiate your selection view controller from the storyboard and configure the options using <a href=""><code>setOptions(_:withDetails:sectionTitles:orderedAs:)</code></a>. This is the key method to set up the data for the selection.</p>
+<p>When you want to show the selection, instantiate your selection view controller from the storyboard and configure the options using <a href="http://thedistance.github.io/SelectionViewController/Classes/SelectionViewController.html#/s:FC23SelectionViewController23SelectionViewController10setOptionsFTGVs10DictionaryCSo8NSObjectPs9AnyObject__11withDetailsGS1_S2_PS3___13sectionTitlesGSqGSaSS__9orderedAsGSaGSaS2____T_"><code>setOptions(_:withDetails:sectionTitles:orderedAs:)</code></a>. This is the key method to set up the data for the selection.</p>
 
 <p>The data for a <code>SelectionViewController</code> is set using 4 properties:</p>
 
@@ -160,7 +160,7 @@ selectionVC.setOptions(options, withDetails: details, sectionTitles: titles, ord
 </code></pre>
 <a href='#selection_behaviour' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='selection_behaviour'>Selection Behaviour</h3>
 
-<p>The behaviour of the selection is set using the <code>selectionType</code> and <code>requiresSelection</code> properties. The <a href="">SelectionType</a> enum has 2 cases, each with associated values:</p>
+<p>The behaviour of the selection is set using the <code>selectionType</code> and <code>requiresSelection</code> properties. The <a href="http://thedistance.github.io/SelectionViewController/Enums/SelectionType.html">SelectionType</a> enum has 2 cases, each with associated values:</p>
 
 <ul>
 <li><code>.All(min: _, max: _)</code>: Case representing the user&rsquo;s selection criteria over the entire table. The selection&rsquo;s positions in each section of the table is not accounted for.</li>
