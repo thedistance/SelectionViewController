@@ -22,7 +22,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
     /// As a presenter may present multiple `SelectionViewController`s, either singularly or at the same time, this property can be used to distinguish what this selection is for. It is not used in the class implementation.
     public var key:Any?
     
-    /// Determines the auto-deselection behaviour.
+    /// Determines the auto-deselection behaviour. Default value is `.Single`.
     public var selectionType:SelectionType = .Single {
         didSet {
             
@@ -197,12 +197,35 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
     /// Manages selections. Deselects cells based on `selectionType`.
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        // clear this re-selection
-        
         let key = keyForIndexPath(indexPath)
         
-        if selectedKeys.contains(key) && !self.requiresSelection {
+        // de-select this currently selected value
+        if selectedKeys.contains(key) {
             clearTableViewSelectionForIndexPath(indexPath)
+            return
+        }
+        
+        // Use this when an enum is created to define the deslection behaviour
+        switch self.selectionType {
+        case let .All(min: _, max: max):
+            
+            if let m = max
+                where selectedKeys.count == m,
+            let firstSelection = selectedKeys.first,
+            let firstSelectedIndexPath = indexPathForKey(firstSelection) {
+                // remove the oldest selection as the max count has been reached
+                self.clearTableViewSelectionForIndexPath(firstSelectedIndexPath)
+            }
+            
+        case let .Sectioned(sectionMin: _, sectionMax: sMax, totalMin: _, totalMax: _):
+            
+            if let m = sMax,
+            let thisSection = self.sectionedSelections().filter({ $0.0 == indexPath.section }).first
+                where thisSection.1.count > m, // self.sectionedSelections() is based on the selectedPaths of the table view, which have already been set
+                let firstSelectedIndexPath = thisSection.1.first {
+                // remove the oldest selection in this section as the max count has been reached
+                self.clearTableViewSelectionForIndexPath(firstSelectedIndexPath)
+            }
         }
         
         // if self.requiresSelection => should not be able to deselect - only allow user to deselect this choice by selecting another
@@ -251,29 +274,23 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      - returns: An array of `Int`s representing a section, with either a selected `indexPath` for that section or `nil` if there is none. There is a tuple for each section in `tableView`.
      
      */
-    public func sectionedSelections() -> [(Int, NSIndexPath?)] {
+    public func sectionedSelections() -> [(Int, [NSIndexPath])] {
         
         let sectioned = self.tableView?.indexPathsForSelectedRows?.map { ($0.section, $0) } ?? []
         
-        var sectionedInfo = [Int:NSIndexPath?]()
+        var sectionedInfo = [Int:[NSIndexPath]]()
         
         for (s, ip) in sectioned {
-            sectionedInfo[s] = ip
+            var currentPaths = sectionedInfo[s] ?? [NSIndexPath]()
+            currentPaths.append(ip)
+            sectionedInfo[s] = currentPaths
         }
         
         for s in 0..<(sortedOptionKeys.count ?? 0) {
-            sectionedInfo[s] = sectionedInfo[s] ?? nil as NSIndexPath?
+            sectionedInfo[s] = sectionedInfo[s] ?? [NSIndexPath]()
         }
         
         return sectionedInfo.map({ $0 }).sort({ $0.0 < $1.0 })
-    }
-    
-    /**
-     - returns: Flag for whether there is a selected `NSIndexPath` for each section in `tableView`.
-     - seealso: `sectionedSelections()`.
-     */
-    public func validSectionedSelection() -> Bool {
-        return sectionedSelections().reduce(true) { $0 && ($1.1 != nil) }
     }
     
     /**
@@ -292,6 +309,40 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      - returns: "Please make a selection."
      */
     public func errorMessageForInvalidSelection() -> String {
+        
+        // guard let tableView = self.tableView else { return "" }
+        
+        switch self.selectionType {
+            
+        case let .All(min: min, max: max):
+            
+            if self.selectedKeys.count < min {
+                let difference = min - self.selectedKeys.count
+                
+                if selectedKeys.count == 0 && min == 1 {
+                    return "Please make a selection."
+                } else {
+                    return "Please select another \(difference) choices."
+                }
+                
+            } else if let m = max where self.selectedKeys.count > max {
+                return "You can only select a maximum of \(m)."
+            }
+            
+        case let .Sectioned(sectionMin: sMin, sectionMax: sMax, totalMin: tMin, totalMax: tMax):
+            
+            switch (sMax, tMax) {
+            case (.None, .None):
+                return "Please at least select \(sMin) per section and \(tMin) in total."
+            case (.None, let .Some(max)):
+                return "Please at least select \(sMin) per section and \(tMin) in total. You can only select a total maximum of \(max)."
+            case (let .Some(max), .None):
+                return "Please at least select \(sMin) per section and \(tMin) in total. You can only select \(max) per section."
+            case let (SMAX, TMAX):
+                return "Please at least select \(sMin) per section and \(tMin) in total. You can only select \(TMAX) per section and a total maximum of \(SMAX)."
+            }
+        }
+        
         return "Please make a selection."
     }
     
@@ -305,11 +356,11 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
         
         guard let tableView = self.tableView else { return "" }
         
-        let missingSelections = sectionedSelections().filter { $0.1 == nil }
+        let missingSelections = sectionedSelections().filter { $0.1.count == 0 }
             .map { self.tableView?.dataSource?.tableView?(tableView, titleForHeaderInSection: $0.0) ?? "Section \($0.0)" }
             .joinWithSeparator(", ")
         
-        return "Please make a selection for \(missingSelections)."
+        return "Please select at least selection for \(missingSelections)."
     }
     
     /**
@@ -346,10 +397,33 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
             
             let validSelection:Bool
             
-            if self.selectionType == .Single || self.selectionType == .Multiple {
-                validSelection = self.selectedKeys.count > 0;
-            } else {
-                validSelection = self.validSectionedSelection()
+            switch self.selectionType {
+                
+            case let .All(min: min, max: _):
+                
+                validSelection = selectedKeys.count >= min
+                
+            case let .Sectioned(sectionMin: sMin, sectionMax: sMax, totalMin: tMin, totalMax: tMax):
+             
+                let sectionedSelections = self.sectionedSelections()
+                
+                let sectionMinMet = sectionedSelections.reduce(true, combine: { $0 && $1.1.count >= sMin })
+                let totalMinMet = selectedKeys.count >= (tMin ?? 0)
+                
+                switch (sMax, tMax) {
+                case (.None, .None):
+                    validSelection = sectionMinMet && totalMinMet
+                case let (.Some(s), .None):
+                    let sectionMaxMet = sectionedSelections.reduce(true, combine: { $0 && $1.1.count <= s })
+                    validSelection = sectionMinMet && totalMinMet && sectionMaxMet
+                case let (.None, .Some(t)):
+                    let totalMaxMet = selectedKeys.count <= t
+                    validSelection = sectionMinMet && totalMinMet && totalMaxMet
+                case let (.Some(s), .Some(t)):
+                    let sectionMaxMet = sectionedSelections.reduce(true, combine: { $0 && $1.1.count <= s })
+                    let totalMaxMet = selectedKeys.count <= t
+                    validSelection = sectionMinMet && totalMinMet && sectionMaxMet && totalMaxMet
+                }
             }
             
             if (validSelection) {
@@ -358,11 +432,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
                 
                 let alertMessage:String
                 
-                if self.selectionType == .Single || self.selectionType == .Multiple {
-                    alertMessage = errorMessageForInvalidSelection()
-                } else {
-                    alertMessage = errorMessageForInvalidSectionedSelection()
-                }
+                alertMessage = errorMessageForInvalidSelection()
                 
                 let alert = UIAlertController(title: errorTitle(),
                                               message: alertMessage,

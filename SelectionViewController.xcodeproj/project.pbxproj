@@ -59,8 +59,6 @@
 		A5240F391CBCE6A100807076 /* SelectionViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SelectionViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5240F3C1CBCE6A100807076 /* SelectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
 		A5240F3E1CBCE6A100807076 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5240F451CBD00F100807076 /* TDSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSelectionViewController.h; sourceTree = "<group>"; };
-		A5240F461CBD00F100807076 /* TDSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSelectionViewController.m; sourceTree = "<group>"; };
 		A57B1A051CE387AF000985EB /* SelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		A57B1A071CE387B8000985EB /* SelectionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewControllerDelegate.swift; sourceTree = "<group>"; };
 		A57B1A091CE387C4000985EB /* SelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionCell.swift; sourceTree = "<group>"; };
@@ -136,8 +134,6 @@
 		A5240F441CBD00F100807076 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A5240F451CBD00F100807076 /* TDSelectionViewController.h */,
-				A5240F461CBD00F100807076 /* TDSelectionViewController.m */,
 				A57B1A051CE387AF000985EB /* SelectionViewController.swift */,
 				A5C228771CBE4FAE00CD65EC /* SelectionType.swift */,
 				A57B1A071CE387B8000985EB /* SelectionViewControllerDelegate.swift */,

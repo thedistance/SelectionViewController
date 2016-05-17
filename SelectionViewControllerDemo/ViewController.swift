@@ -22,7 +22,13 @@ extension SelectionType {
         } else if self == .MultipleSectioned {
             return "Multiple Sectioned"
         } else {
-            return "Enum"
+            
+            switch self {
+            case let .All(min: min, max: max):
+                return "All [\(min ?? 0) - \(max ?? 0)]"
+            case let .Sectioned(sectionMin: sMin, sectionMax: sMax, totalMin: tMin, totalMax: tMax):
+                return "Sectioned [\(sMin ?? 0) - \(sMax ?? 0)] - [\(tMin ?? 0) - \(tMax ?? 0)]"
+            }
         }
     }
     
@@ -46,6 +52,9 @@ class ViewController: UITableViewController {
         .SingleSectioned,
         .Multiple,
         .MultipleSectioned,
+        .All(min: 1, max:3),
+        .Sectioned(sectionMin: 1, sectionMax: 2, totalMin: 0, totalMax: nil),
+        .Sectioned(sectionMin: 1, sectionMax: nil, totalMin: 2, totalMax: 4)
     ]
     
     let selectionRequired:[Bool] = [
@@ -91,8 +100,6 @@ class ViewController: UITableViewController {
 
 
 extension ViewController: SelectionViewControllerDelegate {
-    
-    
     
     func selectionViewControllerRequestsCancel(selectionVC: SelectionViewController) {
         selectionVC.performSegueWithIdentifier("unwindHome", sender: self)

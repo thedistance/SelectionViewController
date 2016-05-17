@@ -13,26 +13,26 @@ public enum SelectionType: Equatable {
     
     /**
  
-     Enum representing the user's selection criteria over the entire table. The selections positions in each section of the table is not accounted for.
+     Enum representing the user's selection criteria over the entire table. The selection's positions in each section of the table is not accounted for.
      
      - parameter min: The minimum selection that the user is allowed if `requiresSelection` is true.
-     - parameter max: The maxiumum selection that the user is allowed. The cell items will be deselected in the number of `selectedKeys` on a `SelectionViewController` is exceeded in a first in first out manner.
+     - parameter max: The maxiumum selection that the user is allowed. `nil` if there is no restriction. The cell items will be deselected if the number of `selectedKeys` on a `SelectionViewController` is exceeded in a first in first out manner.
      
     */
-    case All(min:Int?, max:Int?)
+    case All(min:Int, max:Int?)
     
     /**
      
      Enum representing the user's selection criteria over the entire table with constraints on each section of the table.
      
      - parameter sectionMin: The minimum selection that the user is allowed in a single selection if `requiresSelection` is true.
-     - parameter sectionMax: The maxiumum selection that the user is allowed in a single selection. The cell items will be deselected in the number of `selectedKeys` on a `SelectionViewController` is exceeded in a first in first out manner.
+     - parameter sectionMax: The maxiumum selection that the user is allowed in a single selection. `nil` if there is no per section restriction. The cell items will be deselected if the number of `selectedKeys` on a `SelectionViewController` for a given section is exceeded in a first in first out manner for that section.
      
      - parameter totalMin: The minimum selection that the user is allowed over the entire table if `requiresSelection` is true.
-     - parameter totalMax: The maxiumum selection that the user is allowed over the entire table. The cell items will be deselected in the number of `selectedKeys` on a `SelectionViewController` is exceeded in a first in first out manner.
+     - parameter totalMax: The maxiumum selection that the user is allowed over the entire table. `nil` if there is no restriction.
      
      */
-    case Sectioned(sectionMin:Int?, sectionMax:Int?, totalMin:Int?, totalMax:Int?)
+    case Sectioned(sectionMin:Int, sectionMax:Int?, totalMin:Int, totalMax:Int?)
     
     // MARK: Convenience Creators
     
@@ -53,7 +53,7 @@ public enum SelectionType: Equatable {
          .Sectioned(sectionMin:1, sectionMax:1, totalMin: nil, totalMax: nil)
     */
     public static var SingleSectioned: SelectionType {
-        return Sectioned(sectionMin:1, sectionMax:1, totalMin: nil, totalMax: nil)
+        return Sectioned(sectionMin:1, sectionMax:1, totalMin: 1, totalMax: nil)
     }
     
     /**
@@ -64,7 +64,7 @@ public enum SelectionType: Equatable {
      
     */
     public static var Multiple: SelectionType {
-        return All(min:nil, max:nil)
+        return All(min:1, max:nil)
     }
     
     /**
@@ -74,7 +74,7 @@ public enum SelectionType: Equatable {
          .Sectioned(sectionMin:nil, sectionMax:nil, totalMin: 1, totalMax: nil)
     */
     public static var MultipleSectioned: SelectionType {
-        return Sectioned(sectionMin:nil, sectionMax:nil, totalMin: nil, totalMax: nil)
+        return Sectioned(sectionMin:1, sectionMax:nil, totalMin: 1, totalMax: nil)
     }
 }
 
