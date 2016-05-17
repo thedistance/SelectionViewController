@@ -8,18 +8,15 @@ Customisable Multi-Select UIViewController for iOS.
 ## Features
 
 * [x] Simple Set Up
-* [x] Single & Multiple Selection
-* [x] Sectioned Selection
-* [x] Required Selection
+* [x] Single, Multiple and Sectioned Selection
+* [x] Complex Selection Requirements Specifiable
+* [x] Required / Optional Selection
 * [x] Configurable UI
+* [x] [Documentation](https://thedistance.github.io/SelectionViewController)
 
 ![Selection Overview](https://raw.githubusercontent.com/thedistance/SelectionViewController/gh-pages/Images/SelectionOverview.png)
 
 *Simple form showing sections of options with extra details and multiple selections.*
-
-### Documentation
-
-We normally use [Jazzy](https://github.com/realm/jazzy) to generate our documentation, but as this project is currently a mix of Objective C and Swift our [SelectionViewController Documentation](http://thedistance.github.io/SelectionViewController/) is generated using a combination of jazzy and headerdocs. We will update our docs as and when mixed projects are supported by jazzy.
 
 ## Requirements
 
@@ -45,7 +42,7 @@ to build the framework. Add to it your project according to the Carthage instruc
 
 ### UI
 
-Currently, no default UI is provided. You should create a `TDSelectionViewController` in your Storyboard with cells with Reuse Identifier `Basic` and `Detail` (if `details` are provided - see below). Selection should be configured in a `UITableViewCell` subclass:
+Currently, no default UI is provided. You should create a `SelectionViewController` in your Storyboard with cells with Reuse Identifier `Basic` and `Detail` (if `details` are provided - see below). Selection should be configured in a `UITableViewCell` subclass:
 
 	class SelectionTableViewCell: UITableViewCell, SelectionCell {
 
@@ -62,14 +59,16 @@ Currently, no default UI is provided. You should create a `TDSelectionViewContro
 
 ### Getting Started
 
-When you want to show the selection, instantiate your selection view controller from the storyboard and configure the options using [`setOptions(_:withDetails:orderedAs:)`](). This is the key method to set up the data for the selection.
+When you want to show the selection, instantiate your selection view controller from the storyboard and configure the options using [`setOptions(_:withDetails:sectionTitles:orderedAs:)`](http://thedistance.github.io/SelectionViewController/Classes/SelectionViewController.html#/s:FC23SelectionViewController23SelectionViewController10setOptionsFTGVs10DictionaryCSo8NSObjectPs9AnyObject__11withDetailsGS1_S2_PS3___13sectionTitlesGSqGSaSS__9orderedAsGSaGSaS2____T_). This is the key method to set up the data for the selection.
 
-The data for a `TDSelectionViewController` is set using 4 properties:
+The data for a `SelectionViewController` is set using 4 properties:
 
-* `options: NSDictionary<id, id>`: A dictionary linking unique keys to the value to display to the user. The default implementation assumes the values are strings, however you can subclass `TDSelectionViewController` and override `tableview(_:cellForRowAtIndexPath:)` to handle the values and details. Keys are used to allow for consistent referencing to a specific option with multiple localised display values.
+* `options: NSDictionary<id, id>`: A dictionary linking unique keys to the value to display to the user. The default implementation assumes the values are strings, however you can subclass `SelectionViewController` and override `tableview(_:cellForRowAtIndexPath:)` to handle the values and details. Keys are used to allow for consistent referencing to a specific option with multiple localised display values.
 * `sortedOptionKeys: NSArray<NSArray<id> *>`: An array of arrays of keys. This defines the sections, and order of the options in the sections.
 * `sectionTitles: NSArray<NSString *>`: An array of titles for the section. This should have the same count as `orderedSectionKeys` otherwise an index out of bounds exception will be thrown.
 * `details: NSDictionary`: A dictionary of the option keys and any extra objects that should be associated with this key.
+
+Each of these properties is read only, as setting them individually could corrupt the data source. Hence the combined setter method.
 
 The simple example in the screenshot above uses the following:
 
@@ -82,33 +81,44 @@ The simple example in the screenshot above uses the following:
     
     let order = [["OA", "OB", "OC"], ["CA", "CB", "CC"]]
     
-    let sectionTitles = ["Options", "Choices"]
+    let titles = ["Options", "Choices"]
     
 	let details = ["OB": "Extras", "CA": "Extras"]
 
-	selectionVC.setOptions(options, withDetails: details, orderedAs: order)
-	selectionVC.sectionTitles = sectionTitles
+	selectionVC.setOptions(options, withDetails: details, sectionTitles: titles, orderedAs: order)
 	
 	
 ### Selection Behaviour
 
-The behaviour of the selection is set using the `selectionType` and `requiresSelection` properties. The `SelectionType` enum has 4 values:
+The behaviour of the selection is set using the `selectionType` and `requiresSelection` properties. The [SelectionType](http://thedistance.github.io/SelectionViewController/Enums/SelectionType.html) enum has 2 cases, each with associated values:
 
-* **Single**: Only a single item can be selected. If `requiresSelection`, there must be one and only one selection.
+* `.All(min: _, max: _)`: Case representing the user's selection criteria over the entire table. The selection's positions in each section of the table is not accounted for.
+* `.Sectioned(sectionMin: _, sectionMax: _, totalMin: _, totalMax: _)`: Case representing the user's selection criteria over the entire table with constraints on each section of the table.
+
+If the user selects more than the `max` choices for a `.All` selection type, or `sectionMax` for a `.Sectioned`, choices are deselected in a first in first out manner. If `requiresSelection` is set to `true` all values in these enums combine to determine whether the user has made a valid selection. 
+
+These two variables allow you to specify complex selection criteria:
+
+* For a table with 3 sections a user can select 2-4 choices per section and 8 in total: 
+
+        .Sectioned(sectionMin: 2, sectionMax: 4, totalMin: 6, totalMax: 8)
+       
+To make common types of selection easier, 4 convenience options are given:
+
+* **Single**: Only a single item can be selected. If `requiresSelection`, there must be one and only one selection. 
 * **SingleSectioned**: Only a single item in each section can be selected. If `requiresSelection`, one and only one item must be selected in each section.
 * **Multiple**: Multiple items can be selected. If `requiresSelection`, at least one item from any section must be selected.
 * **MultipleSectioned**: Multiple items in a given section can be selected. If `requiresSelection`, at least one item must be selected in each section.
     
-If the selection criteria are not met by the user an alert is shown from the `dismissSelectionViewController(_:)` method. This alert can be configured by subclassing `TDSelectionViewController` and overriding one of
+If the selection criteria are not met by the user an alert is shown from the `dismissSelectionViewController(_:)` method. This alert can be configured by subclassing `SelectionViewController` and overriding one of
 
 * `errorTitle()`
 * `errorMessageForInvalidSelection()`
-* `errorMessageForInvalidSectionedSelection()`
 * `errorDismissButtonTitle()`
 
 ### Getting User's Selection
 
-`TDSelectionViewController` has a `delegate` which is used to communicate results to the presenting view. 
+`SelectionViewController` has a `delegate` which is used to communicate results to the presenting view. 
 
 * `selectionViewControllerRequestsDismissal(_:)`: The user's choices should be deemed chosen and the selection view dismissed. Their selection can be accessed through the `selectedKeys` property.
 * `selectionViewControllerRequestsCancel(_:)`: The user's current selection on this view should be ignored and the selection view dismissed.
