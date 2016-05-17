@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SelectionType Enum Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/SelectionType" class="dashAnchor"></a>
+    <a title="SelectionType Enum Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/thedistance/SelectionViewController"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        SelectionType Enum Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/SelectionTableViewCell.html">SelectionTableViewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SelectionViewController.html">SelectionViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/SelectionType.html">SelectionType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF23SelectionViewControlleroi2eeFTOS_13SelectionTypeS0__Sb">==(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/SelectionCell.html">SelectionCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SelectionViewControllerDelegate.html">SelectionViewControllerDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>SelectionType</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SelectionType</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>Used to determine the selection and deselection behaviour or a <code><a href="../Classes/SelectionViewController.html">SelectionViewController</a></code>. Combine this with <code><a href="../Classes/SelectionViewController.html#/s:vC23SelectionViewController23SelectionViewController17requiresSelectionSb">SelectionViewController.requiresSelection</a></code> to enforce selection behaviours.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FO23SelectionViewController13SelectionType3AllFMS0_FT3minSi3maxGSqSi__S0_"></a>
+                    <a name="//apple_ref/swift/Element/All" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FO23SelectionViewController13SelectionType3AllFMS0_FT3minSi3maxGSqSi__S0_">All</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Case representing the user&rsquo;s selection criteria over the entire table. The selection&rsquo;s positions in each section of the table is not accounted for.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">All</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span><span class="kt">Int</span><span class="p">,</span> <span class="nv">max</span><span class="p">:</span><span class="kt">Int</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FO23SelectionViewController13SelectionType9SectionedFMS0_FT10sectionMinSi10sectionMaxGSqSi_8totalMinSi8totalMaxGSqSi__S0_"></a>
+                    <a name="//apple_ref/swift/Element/Sectioned" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FO23SelectionViewController13SelectionType9SectionedFMS0_FT10sectionMinSi10sectionMaxGSqSi_8totalMinSi8totalMaxGSqSi__S0_">Sectioned</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Case representing the user&rsquo;s selection criteria over the entire table with constraints on each section of the table.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Sectioned</span><span class="p">(</span><span class="nv">sectionMin</span><span class="p">:</span><span class="kt">Int</span><span class="p">,</span> <span class="nv">sectionMax</span><span class="p">:</span><span class="kt">Int</span><span class="p">?,</span> <span class="nv">totalMin</span><span class="p">:</span><span class="kt">Int</span><span class="p">,</span> <span class="nv">totalMax</span><span class="p">:</span><span class="kt">Int</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sectionMin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The minimum selection that the user is allowed in a single selection if <code>requiresSelection</code> is true.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sectionMax</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maxiumum selection that the user is allowed in a single selection. <code>nil</code> if there is no per section restriction. The cell items will be deselected if the number of <code>selectedKeys</code> on a <code>SelectionViewController</code> for a given section is exceeded in a first in first out manner for that section.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>totalMin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The minimum selection that the user is allowed over the entire table if <code>requiresSelection</code> is true.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>totalMax</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maxiumum selection that the user is allowed over the entire table. <code>nil</code> if there is no restriction.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Convenience%20Creators"></a>
+                <a name="//apple_ref/swift/Section/Convenience Creators" class="dashAnchor"></a>
+                <a href="#/Convenience%20Creators">
+                  <h3 class="section-name">Convenience Creators</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvO23SelectionViewController13SelectionType6SingleS0_"></a>
+                    <a name="//apple_ref/swift/Variable/Single" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvO23SelectionViewController13SelectionType6SingleS0_">Single</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Only a single item can be selected. If <code>requiresSelection</code>, there must be one and only one selection.</p>
+
+<pre class="highlight plaintext"><code>.All(min:1, max:1)
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">Single</span><span class="p">:</span> <span class="kt">SelectionType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvO23SelectionViewController13SelectionType15SingleSectionedS0_"></a>
+                    <a name="//apple_ref/swift/Variable/SingleSectioned" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvO23SelectionViewController13SelectionType15SingleSectionedS0_">SingleSectioned</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Only a single item in each section can be selected. If <code>requiresSelection</code>, one and only one item must be selected in each section.</p>
+
+<pre class="highlight plaintext"><code>.Sectioned(sectionMin:1, sectionMax:1, totalMin: nil, totalMax: nil)
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">SingleSectioned</span><span class="p">:</span> <span class="kt">SelectionType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvO23SelectionViewController13SelectionType8MultipleS0_"></a>
+                    <a name="//apple_ref/swift/Variable/Multiple" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvO23SelectionViewController13SelectionType8MultipleS0_">Multiple</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Multiple items can be selected. If <code>requiresSelection</code>, at least one item from any section must be selected.</p>
+
+<pre class="highlight plaintext"><code>.All(min:1, max:nil)
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">Multiple</span><span class="p">:</span> <span class="kt">SelectionType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvO23SelectionViewController13SelectionType17MultipleSectionedS0_"></a>
+                    <a name="//apple_ref/swift/Variable/MultipleSectioned" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvO23SelectionViewController13SelectionType17MultipleSectionedS0_">MultipleSectioned</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Multiple items in a given section can be selected. If <code>requiresSelection</code>, at least one item must be selected in each section.</p>
+
+<pre class="highlight plaintext"><code>.Sectioned(sectionMin:nil, sectionMax:nil, totalMin: 1, totalMax: nil)
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">MultipleSectioned</span><span class="p">:</span> <span class="kt">SelectionType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="https://github.com/thedistance" target="_blank" rel="external">Josh Campion @ The Distance</a>. All rights reserved. (Last updated: 2016-05-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.6.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
