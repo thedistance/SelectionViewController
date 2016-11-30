@@ -19,7 +19,7 @@ public enum SelectionType: Equatable {
      - parameter max: The maxiumum selection that the user is allowed. `nil` if there is no restriction. The cell items will be deselected if the number of `selectedKeys` on a `SelectionViewController` is exceeded in a first in first out manner.
      
     */
-    case All(min:Int, max:Int?)
+    case all(min:Int, max:Int?)
     
     /**
      
@@ -32,7 +32,7 @@ public enum SelectionType: Equatable {
      - parameter totalMax: The maxiumum selection that the user is allowed over the entire table. `nil` if there is no restriction.
      
      */
-    case Sectioned(sectionMin:Int, sectionMax:Int?, totalMin:Int, totalMax:Int?)
+    case sectioned(sectionMin:Int, sectionMax:Int?, totalMin:Int, totalMax:Int?)
     
     // MARK: Convenience Creators
     
@@ -43,7 +43,7 @@ public enum SelectionType: Equatable {
          .All(min:1, max:1)
     */
     public static var Single: SelectionType {
-        return All(min:1, max:1)
+        return all(min:1, max:1)
     }
     
     /**
@@ -53,7 +53,7 @@ public enum SelectionType: Equatable {
          .Sectioned(sectionMin:1, sectionMax:1, totalMin: nil, totalMax: nil)
     */
     public static var SingleSectioned: SelectionType {
-        return Sectioned(sectionMin:1, sectionMax:1, totalMin: 1, totalMax: nil)
+        return sectioned(sectionMin:1, sectionMax:1, totalMin: 1, totalMax: nil)
     }
     
     /**
@@ -64,7 +64,7 @@ public enum SelectionType: Equatable {
      
     */
     public static var Multiple: SelectionType {
-        return All(min:1, max:nil)
+        return all(min:1, max:nil)
     }
     
     /**
@@ -74,7 +74,7 @@ public enum SelectionType: Equatable {
          .Sectioned(sectionMin:nil, sectionMax:nil, totalMin: 1, totalMax: nil)
     */
     public static var MultipleSectioned: SelectionType {
-        return Sectioned(sectionMin:1, sectionMax:nil, totalMin: 1, totalMax: nil)
+        return sectioned(sectionMin:1, sectionMax:nil, totalMin: 1, totalMax: nil)
     }
 }
 
@@ -82,9 +82,9 @@ public enum SelectionType: Equatable {
 public func ==(s1:SelectionType, s2:SelectionType) -> Bool {
     
     switch (s1, s2) {
-    case (.All(let min1, let max1), .All(let min2, let max2)):
+    case (.all(let min1, let max1), .all(let min2, let max2)):
         return min1 == min2 && max1 == max2
-    case (.Sectioned(let smin1, let smax1, let tmin1, let tmax1), .Sectioned(let smin2, let smax2, let tmin2, let tmax2)):
+    case (.sectioned(let smin1, let smax1, let tmin1, let tmax1), .sectioned(let smin2, let smax2, let tmin2, let tmax2)):
         return smin1 == smin2 && smax1 == smax2 && tmin1 == tmin2 && tmax1 == tmax2
     default:
         return false

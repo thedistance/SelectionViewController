@@ -12,9 +12,9 @@ import Foundation
 public protocol SelectionViewControllerDelegate: class {
     
     /// This should request dismissal from the delegate. This assumes no specific form of presentation allowing the presenter to decide how the view is displayed to the user. It is assumed that this delegate call back does not update the selection in the presenting view controller.
-    func selectionViewControllerRequestsCancel(selectionViewController: SelectionViewController)
+    func selectionViewControllerRequestsCancel(_ selectionViewController: SelectionViewController)
     
     /// This should request dismissal from the delegate. This assumes no specific form of presentation allowing the presenter to decide how the view is displayed to the user. It is assumed that this delegate call back updates the selection in the presenting view controller.
-    func selectionViewControllerRequestsDismissal(selectionViewController: SelectionViewController)
+    func selectionViewControllerRequestsDismissal(_ selectionViewController: SelectionViewController)
     
 }

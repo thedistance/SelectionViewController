@@ -9,20 +9,20 @@
 import UIKit
 
 /// Simple implementation of `SelectionCell` with two labels and checkmark selection state.
-public class SelectionTableViewCell: UITableViewCell, SelectionCell {
+open class SelectionTableViewCell: UITableViewCell, SelectionCell {
 
     /// The label to show the option title.
-    @IBOutlet public var titleLabel: UILabel?
+    @IBOutlet open var titleLabel: UILabel?
     
     /// The label to show the option detail.
-    @IBOutlet public var detailLabel: UILabel?
+    @IBOutlet open var detailLabel: UILabel?
     
     /// Sets this cell's `accessoryType` to be `.Checkmark` if selected, `.None` otherwise.
-    override public func setSelected(selected: Bool, animated: Bool) {
+    override open func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-        accessoryType = selected ? .Checkmark : .None
+        accessoryType = selected ? .checkmark : .none
     }
 
 }

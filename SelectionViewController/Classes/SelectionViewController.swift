@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 /**
  
@@ -17,18 +41,18 @@ import UIKit
  The `delegate` property should be set to return the selected choice(s) on dismissal. The delegate methods only request dismissal, they makes no assumption of how to be dismissed. This allows for modal / push / custom / child view controller presentation of the choices.
  
  */
-public class SelectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+open class SelectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: Properties
     
     /// As a presenter may present multiple `SelectionViewController`s, either singularly or at the same time, this property can be used to distinguish what this selection is for. It is not used in the class implementation.
-    public var key:Any?
+    open var key:Any?
     
     /// Determines the auto-deselection behaviour. Default value is `.Single`.
-    public var selectionType:SelectionType = .Single {
+    open var selectionType:SelectionType = .Single {
         didSet {
             
-            if case let .All(_, max) = selectionType where max == 1 {
+            if case let .all(_, max) = selectionType, max == 1 {
                 tableView?.allowsMultipleSelection = false
             } else {
                 tableView?.allowsMultipleSelection = true
@@ -37,33 +61,33 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
     }
     
     /// The table to show the selection.
-    @IBOutlet public var tableView:UITableView?
+    @IBOutlet open var tableView:UITableView?
     
     /// Dictionary representing the options the user can choose from. The keys are ids used in the code, and will be passed back to the delegate as the selections parameter in the `selectionViewController:requestsDismissalWithSelections:` method. The values should be what is to be displayed to the user. This should be set from the `setOptions(_:withDetails:sectionTitles:orderedAs:)` method.
-    public private(set) var options = [NSObject:AnyObject]()
+    open fileprivate(set) var options = [AnyHashable: Any]()
     
     /// Supplementary info for entries in `options`. Keys should match those in `options`.
-    public private(set) var optionDetails = [NSObject:AnyObject]()
+    open fileprivate(set) var optionDetails = [AnyHashable: Any]()
     
     /// The titles to use for the section in the selection view. This should be set from the `setOptions(_:withDetails:sectionTitles:orderedAs:)` method.
-    public private(set) var sectionTitles:[String]? = nil
+    open fileprivate(set) var sectionTitles:[String]? = nil
     
     /// Array of Arrays of keys for the choices. The nested array represents the section - row structure of the tableview. the keys should be unique otherwise the user's specific choices cannot be distinguished. These objects should be the same as the keys in  `options`. This should be set from the `setOptions(_:withDetails:sectionTitles:orderedAs:)` method.
-    public private(set) var sortedOptionKeys = [[NSObject]]()
+    open fileprivate(set) var sortedOptionKeys = [[NSObject]]()
     
     /// Determines whether or not the view can be dismissed without the user making a selection. If true and no selection has been made when the user requests dismissal, a UIAlertView is presented. Default value is `false`.
-    public var requiresSelection = false
+    open var requiresSelection = false
     
     /// Delegate to inform of the user's requests for dismissal or cancel.
-    public weak var delegate:SelectionViewControllerDelegate?
+    open weak var delegate:SelectionViewControllerDelegate?
     
     /// The current selections made by the user. These should be stored as the keys from the `options` and `optionKeys`. Selections can be pre-specified by the presenter as this property updates the selected rows in `tableView` on `viewWillAppear:`.
-    public var selectedKeys = [NSObject]()
+    open var selectedKeys = [NSObject]()
     
     // MARK: View Lifecycle
     
     /// Updates properties.
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         // re-assign the selection type to set the tableView multi selection properties
@@ -72,7 +96,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
     }
     
     /// Pre-selects `tableView` cells based on `selectedKeys`.
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if selectedKeys.count > 0 {
@@ -80,7 +104,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
             for key in selectedKeys {
                 
                 if let selectedPath = indexPathForKey(key) {
-                    tableView?.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: .None)
+                    tableView?.selectRow(at: selectedPath, animated: false, scrollPosition: .none)
                 }
             }
             
@@ -99,7 +123,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      - parameter orderedAs: Sets `sortedOptionKeys`.
      
     */
-    public func setOptions(options:[NSObject:AnyObject], withDetails: [NSObject:AnyObject], sectionTitles:[String]?, orderedAs:[[NSObject]]) {
+    open func setOptions(_ options:[AnyHashable: Any], withDetails: [AnyHashable: Any], sectionTitles:[String]?, orderedAs:[[NSObject]]) {
         self.options = options
         self.optionDetails = withDetails
         self.sectionTitles = sectionTitles
@@ -118,7 +142,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      - returns: A key in `options` which is at `indexPath` in `sortedOptionKeys`.
      
      */
-    public func keyForIndexPath(indexPath:NSIndexPath) -> NSObject {
+    open func keyForIndexPath(_ indexPath:IndexPath) -> NSObject {
         return sortedOptionKeys[indexPath.section][indexPath.row]
     }
     
@@ -129,14 +153,14 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      - parameter key: An object which is a key in `options`.
      - returns: The index of this key in `sortedOptionKeys`, representing this option's position in the table. `nil` if the key given is not found in the `options` dictionary.
      */
-    public func indexPathForKey(key:NSObject) -> NSIndexPath? {
+    open func indexPathForKey(_ key:NSObject) -> IndexPath? {
         for s in 0..<sortedOptionKeys.count {
             
             let sectionKeys = sortedOptionKeys[s]
             
             for r in 0..<sectionKeys.count {
                 if sectionKeys[r] == key {
-                    return NSIndexPath(forRow: r, inSection: s)
+                    return IndexPath(row: r, section: s)
                 }
             }
         }
@@ -155,7 +179,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      - returns: "Detail" if `optionDetails` has an entry for the given `indexPath`, "Basic" otherwise.
      
     */
-    public func tableView(tableView:UITableView, cellIdentifierForRowAtIndexPath indexPath:NSIndexPath) -> String {
+    @nonobjc open func tableView(_ tableView:UITableView, cellIdentifierForRowAtIndexPath indexPath:IndexPath) -> String {
         
         let key = keyForIndexPath(indexPath)
         let hasDetail = optionDetails[key] != nil
@@ -164,21 +188,21 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
     }
     
     /// - returns: the number of sub arrays in `sortedOptionKeys`.
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return sortedOptionKeys.count
     }
     
     /// - returns: the number of entries in the array at the given `indexPath.section` in `sortedOptionKeys`.
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortedOptionKeys[section].count
     }
     
     /// - returns: A `UITableViewCell` dequeued based on the result of `tableView(_:cellIdentifierForRowAtIndexPath:)`. If that cell conforms to `SelectionCell`, the option and deatil are set on the label properties.
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let identifier = self.tableView(tableView, cellIdentifierForRowAtIndexPath: indexPath)
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         
         if let selectionCell = cell as? SelectionCell {
             
@@ -194,14 +218,14 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
     }
     
     /// - returns: The entry in `sectionTitles` if it is set.
-    public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles?[section]
     }
     
     // MARK: UITableViewDelegate Methods
     
     /// Manages selections. Deselects cells based on `selectionType`.
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let key = keyForIndexPath(indexPath)
         
@@ -213,21 +237,19 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
         
         // Use this when an enum is created to define the deslection behaviour
         switch self.selectionType {
-        case let .All(min: _, max: max):
+        case let .all(min: _, max: max):
             
-            if let m = max
-                where selectedKeys.count == m,
+            if let m = max, selectedKeys.count == m,
             let firstSelection = selectedKeys.first,
             let firstSelectedIndexPath = indexPathForKey(firstSelection) {
                 // remove the oldest selection as the max count has been reached
                 self.clearTableViewSelectionForIndexPath(firstSelectedIndexPath)
             }
             
-        case let .Sectioned(sectionMin: _, sectionMax: sMax, totalMin: _, totalMax: _):
+        case let .sectioned(sectionMin: _, sectionMax: sMax, totalMin: _, totalMax: _):
             
             if let m = sMax,
-            let thisSection = self.sectionedSelections().filter({ $0.0 == indexPath.section }).first
-                where thisSection.1.count > m, // self.sectionedSelections() is based on the selectedPaths of the table view, which have already been set
+            let thisSection = self.sectionedSelections().filter({ $0.0 == indexPath.section }).first, thisSection.1.count > m, // self.sectionedSelections() is based on the selectedPaths of the table view, which have already been set
                 let firstSelectedIndexPath = thisSection.1.first {
                 // remove the oldest selection in this section as the max count has been reached
                 self.clearTableViewSelectionForIndexPath(firstSelectedIndexPath)
@@ -244,8 +266,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
             
             for key in previousKeys {
                 
-                if let selectedPath = indexPathForKey(key)
-                    where selectedPath.section == indexPath.section {
+                if let selectedPath = indexPathForKey(key), selectedPath.section == indexPath.section {
                     clearTableViewSelectionForIndexPath(selectedPath)
                 }
             }
@@ -255,22 +276,22 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
     }
     
     /// Updates `selectedKeys` based on the key for the given `indexPath`.
-    public func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
         let key = keyForIndexPath(indexPath)
-        if let idx = selectedKeys.indexOf(key) {
-            selectedKeys.removeAtIndex(idx)
+        if let idx = selectedKeys.index(of: key) {
+            selectedKeys.remove(at: idx)
         }
     }
     
     /// Convenience method for deselecting a cell.
-    public func clearTableViewSelectionForIndexPath(indexPath:NSIndexPath) {
+    open func clearTableViewSelectionForIndexPath(_ indexPath:IndexPath) {
         
         guard let tableView = self.tableView else { return }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         // manually send the delegate message as it doesn't get called when deselecting programmatically
-        tableView.delegate?.tableView?(tableView, didDeselectRowAtIndexPath: indexPath)
+        tableView.delegate?.tableView?(tableView, didDeselectRowAt: indexPath)
     }
     
     // MARK: Error Configuration
@@ -282,23 +303,23 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      - returns: An array of `Int`s representing a section, with either a selected `indexPath` for that section or `nil` if there is none. There is a tuple for each section in `tableView`.
      
      */
-    public func sectionedSelections() -> [(Int, [NSIndexPath])] {
+    open func sectionedSelections() -> [(Int, [IndexPath])] {
         
         let sectioned = self.tableView?.indexPathsForSelectedRows?.map { ($0.section, $0) } ?? []
         
-        var sectionedInfo = [Int:[NSIndexPath]]()
+        var sectionedInfo = [Int:[IndexPath]]()
         
         for (s, ip) in sectioned {
-            var currentPaths = sectionedInfo[s] ?? [NSIndexPath]()
+            var currentPaths = sectionedInfo[s] ?? [IndexPath]()
             currentPaths.append(ip)
             sectionedInfo[s] = currentPaths
         }
         
-        for s in 0..<(sortedOptionKeys.count ?? 0) {
-            sectionedInfo[s] = sectionedInfo[s] ?? [NSIndexPath]()
+        for s in 0..<(sortedOptionKeys.count ) {
+            sectionedInfo[s] = sectionedInfo[s] ?? [IndexPath]()
         }
         
-        return sectionedInfo.map({ $0 }).sort({ $0.0 < $1.0 })
+        return sectionedInfo.map({ $0 }).sorted(by: { $0.0 < $1.0 })
     }
     
     /**
@@ -306,8 +327,8 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      The error title shown if the user's selection is invalid given `selectionType` and `requiresSelection`.
      - returns: The capitalized version of the title of this `UIViewController`.
      */
-    public func errorTitle() -> String? {
-        return self.title?.capitalizedString
+    open func errorTitle() -> String? {
+        return self.title?.capitalized
     }
     
     /**
@@ -316,13 +337,13 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      
      - returns: An error message dependent `self.selectionType` whether `self.selectedKeys` exceeds or does not meet the selection requirements.
      */
-    public func errorMessageForInvalidSelection() -> String {
+    open func errorMessageForInvalidSelection() -> String {
         
         // guard let tableView = self.tableView else { return "" }
         
         switch self.selectionType {
             
-        case let .All(min: min, max: max):
+        case let .all(min: min, max: max):
             
             if self.selectedKeys.count < min {
                 let difference = min - self.selectedKeys.count
@@ -333,18 +354,18 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
                     return "Please select another \(difference) choices."
                 }
                 
-            } else if let m = max where self.selectedKeys.count > max {
+            } else if let m = max, self.selectedKeys.count > max {
                 return "You can only select a maximum of \(m)."
             }
             
-        case let .Sectioned(sectionMin: sMin, sectionMax: sMax, totalMin: tMin, totalMax: tMax):
+        case let .sectioned(sectionMin: sMin, sectionMax: sMax, totalMin: tMin, totalMax: tMax):
             
             switch (sMax, tMax) {
-            case (.None, .None):
+            case (.none, .none):
                 return "Please select at least \(sMin) per section and \(tMin) in total."
-            case (.None, let .Some(max)):
+            case (.none, let .some(max)):
                 return "Please select at least \(sMin) per section and \(tMin) in total. You can select a maximum of \(max)."
-            case (let .Some(max), .None):
+            case (let .some(max), .none):
                 return "Please select at least \(sMin) per section and \(tMin) in total. You can select a maximum of \(max) per section."
             case let (SMAX, TMAX):
                 return "Please select at least \(sMin) per section and \(tMin) in total. You can select a maximum of \(TMAX) per section, and \(SMAX) overall."
@@ -360,7 +381,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      
      - returns: "OK".
      */
-    public func errorDismissButtonTitle() -> String {
+    open func errorDismissButtonTitle() -> String {
         return "OK"
     }
     
@@ -368,7 +389,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
     // MARK: View Dismissal
     
     /// Asks for cancellation from the delegate. No selection checking is done as it is assumed the previous selection is retained.
-    public func cancelSelectionViewController(sender:AnyObject?) {
+    open func cancelSelectionViewController(_ sender:AnyObject?) {
         delegate?.selectionViewControllerRequestsCancel(self)
     }
     
@@ -382,7 +403,7 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
      - seealso: `errorMessageForInvalidSectionedSelection()`
      - seealso: `errorDismissButtonTitle()`
      */
-    public func dismissSelectionViewController(sender:AnyObject?) {
+    open func dismissSelectionViewController(_ sender:AnyObject?) {
         
         if (self.requiresSelection) {
             
@@ -390,28 +411,28 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
             
             switch self.selectionType {
                 
-            case let .All(min: min, max: _):
+            case let .all(min: min, max: _):
                 
                 validSelection = selectedKeys.count >= min
                 
-            case let .Sectioned(sectionMin: sMin, sectionMax: sMax, totalMin: tMin, totalMax: tMax):
+            case let .sectioned(sectionMin: sMin, sectionMax: sMax, totalMin: tMin, totalMax: tMax):
              
                 let sectionedSelections = self.sectionedSelections()
                 
-                let sectionMinMet = sectionedSelections.reduce(true, combine: { $0 && $1.1.count >= sMin })
-                let totalMinMet = selectedKeys.count >= (tMin ?? 0)
+                let sectionMinMet = sectionedSelections.reduce(true, { $0 && $1.1.count >= sMin })
+                let totalMinMet = selectedKeys.count >= (tMin )
                 
                 switch (sMax, tMax) {
-                case (.None, .None):
+                case (.none, .none):
                     validSelection = sectionMinMet && totalMinMet
-                case let (.Some(s), .None):
-                    let sectionMaxMet = sectionedSelections.reduce(true, combine: { $0 && $1.1.count <= s })
+                case let (.some(s), .none):
+                    let sectionMaxMet = sectionedSelections.reduce(true, { $0 && $1.1.count <= s })
                     validSelection = sectionMinMet && totalMinMet && sectionMaxMet
-                case let (.None, .Some(t)):
+                case let (.none, .some(t)):
                     let totalMaxMet = selectedKeys.count <= t
                     validSelection = sectionMinMet && totalMinMet && totalMaxMet
-                case let (.Some(s), .Some(t)):
-                    let sectionMaxMet = sectionedSelections.reduce(true, combine: { $0 && $1.1.count <= s })
+                case let (.some(s), .some(t)):
+                    let sectionMaxMet = sectionedSelections.reduce(true, { $0 && $1.1.count <= s })
                     let totalMaxMet = selectedKeys.count <= t
                     validSelection = sectionMinMet && totalMinMet && sectionMaxMet && totalMaxMet
                 }
@@ -427,13 +448,13 @@ public class SelectionViewController: UIViewController, UITableViewDataSource, U
                 
                 let alert = UIAlertController(title: errorTitle(),
                                               message: alertMessage,
-                                              preferredStyle: .Alert)
+                                              preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: errorDismissButtonTitle(),
-                    style: .Cancel,
+                    style: .cancel,
                     handler: nil))
                 
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
             }
         } else {
             self.delegate?.selectionViewControllerRequestsDismissal(self)
