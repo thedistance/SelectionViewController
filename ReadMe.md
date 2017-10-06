@@ -1,6 +1,6 @@
 # SelectionViewController
 
-![CocoaPods Compatible](https://cocoapod-badges.herokuapp.com/v/SelectionViewController/badge.png)]
+![CocoaPods Compatible](https://cocoapod-badges.herokuapp.com/v/SelectionViewController/badge.png)
 ![iOS](https://cocoapod-badges.herokuapp.com/p/SelectionViewController/badge.png)
 ![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)
 
