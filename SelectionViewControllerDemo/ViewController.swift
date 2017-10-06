@@ -24,10 +24,10 @@ extension SelectionType {
         } else {
             
             switch self {
-            case let .All(min: min, max: max):
-                return "All [\(min ?? 0) - \(max ?? 0)]"
-            case let .Sectioned(sectionMin: sMin, sectionMax: sMax, totalMin: tMin, totalMax: tMax):
-                return "Sectioned [\(sMin ?? 0) - \(sMax ?? 0)] - [\(tMin ?? 0) - \(tMax ?? 0)]"
+            case let .all(min: min, max: max):
+                return "All [\(min) - \(max ?? 0)]"
+            case let .sectioned(sectionMin: sMin, sectionMax: sMax, totalMin: tMin, totalMax: tMax):
+                return "Sectioned [\(sMin) - \(sMax ?? 0)] - [\(tMin) - \(tMax ?? 0)]"
             }
         }
     }
@@ -43,7 +43,7 @@ class ViewController: UITableViewController {
                    "CB":"Choice B",
                    "CC":"Choice C"]
     
-    let order:[[NSObject]] = [["OA", "OB", "OC"], ["CA", "CB", "CC"]]
+    let order:[[NSObject]] = [["OA" as NSObject, "OB" as NSObject, "OC" as NSObject], ["CA" as NSObject, "CB" as NSObject, "CC" as NSObject]]
     
     let details = ["OB": "Extras", "CA": "Extras"]
     
@@ -52,9 +52,9 @@ class ViewController: UITableViewController {
         .SingleSectioned,
         .Multiple,
         .MultipleSectioned,
-        .All(min: 1, max:3),
-        .Sectioned(sectionMin: 1, sectionMax: 2, totalMin: 0, totalMax: nil),
-        .Sectioned(sectionMin: 1, sectionMax: nil, totalMin: 2, totalMax: 4)
+        .all(min: 1, max:3),
+        .sectioned(sectionMin: 1, sectionMax: 2, totalMin: 0, totalMax: nil),
+        .sectioned(sectionMin: 1, sectionMax: nil, totalMin: 2, totalMax: 4)
     ]
     
     let selectionRequired:[Bool] = [
@@ -62,7 +62,7 @@ class ViewController: UITableViewController {
         true
     ]
     
-    var selections = [NSIndexPath: [NSObject]]()
+    var selections = [IndexPath: [NSObject]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,9 +73,9 @@ class ViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let selectionVC = (segue.destinationViewController as? UINavigationController)?.topViewController as? SelectionViewController {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectionVC = (segue.destination as? UINavigationController)?.topViewController as? SelectionViewController {
             
             selectionVC.setOptions(options, withDetails: details, sectionTitles: ["Options", "Choices"], orderedAs: order)
             
@@ -101,48 +101,48 @@ class ViewController: UITableViewController {
 
 extension ViewController: SelectionViewControllerDelegate {
     
-    func selectionViewControllerRequestsCancel(selectionVC: SelectionViewController) {
-        selectionVC.performSegueWithIdentifier("unwindHome", sender: self)
+    func selectionViewControllerRequestsCancel(_ selectionVC: SelectionViewController) {
+        selectionVC.performSegue(withIdentifier: "unwindHome", sender: self)
     }
     
-    func selectionViewControllerRequestsDismissal(selectionVC: SelectionViewController) {
+    func selectionViewControllerRequestsDismissal(_ selectionVC: SelectionViewController) {
         
         if let sp = tableView.indexPathForSelectedRow {
             
             let selected = selectionVC.selectedKeys
             
             selections[sp] = selected.count > 0 ? selected : nil
-            tableView.reloadRowsAtIndexPaths([sp], withRowAnimation: .Automatic)
+            tableView.reloadRows(at: [sp], with: .automatic)
         }
         
-        selectionVC.performSegueWithIdentifier("unwindHome", sender: self)
+        selectionVC.performSegue(withIdentifier: "unwindHome", sender: self)
     }
 }
 
 extension ViewController {
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return selectionRequired.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return selectionTypes.count
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Selection " + (selectionRequired[section] ? "" : "Not ") + "Required"
     }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("SelectionCell")
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell")
         
         cell?.textLabel?.text = "Selection: \(selectionTypes[indexPath.row].description)"
         
         cell?.detailTextLabel?.text = selections[indexPath]?
             .flatMap { $0 as? String }
             .flatMap { options[$0] }
-            .joinWithSeparator(", ") ?? "No Selection"
+            .joined(separator: ", ") ?? "No Selection"
         
         return cell!
     }
@@ -150,11 +150,11 @@ extension ViewController {
 
 class DemoSelectionViewController: SelectionViewController {
     
-    @IBAction override func cancelSelectionViewController(sender: AnyObject?) {
+    @IBAction override func cancelSelectionViewController(_ sender: AnyObject?) {
         super.cancelSelectionViewController(sender)
     }
     
-    @IBAction override func dismissSelectionViewController(sender: AnyObject?) {
+    @IBAction override func dismissSelectionViewController(_ sender: AnyObject?) {
         super.dismissSelectionViewController(sender)
     }
 }

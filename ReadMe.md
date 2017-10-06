@@ -1,6 +1,7 @@
 # SelectionViewController
 
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+![CocoaPods Compatible](https://cocoapod-badges.herokuapp.com/v/SelectionViewController/badge.png)]
+![iOS](https://cocoapod-badges.herokuapp.com/p/SelectionViewController/badge.png)
 ![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)
 
 Customisable Multi-Select UIViewController for iOS.
@@ -21,22 +22,22 @@ Customisable Multi-Select UIViewController for iOS.
 ## Requirements
 
 - iOS 8.0+
-- Xcode 7.3
-- Swift 2.2
+- Xcode 9
+- Swift 4.0
 
 ## Installation
 
-### Carthage
+### CocoaPods
 
-[Carthage](https://github.com/Carthage/Carthage) is the preferred dependency manager as it reduces build times during app development. SelectionViewController has been built for Carthage. Add 
+[CocoaPods](https://cocoapods.org) is the preferred dependency manager as it reduces build times during app development. SelectionViewController has been built for CocoaPods. Add
 	
-	github "TheDistance/SelectionViewController"
+	pod 'SelectionViewController'
 	
-to your cartfile and run
+to your podfile and run
 	
-	carthage update SelectionViewController
+	pod install
 	
-to build the framework. Add to it your project according to the Carthage instructions.
+to install the framework.
 
 ## Usage
 

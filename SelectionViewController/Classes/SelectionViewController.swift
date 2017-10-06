@@ -368,7 +368,7 @@ open class SelectionViewController: UIViewController, UITableViewDataSource, UIT
             case (let .some(max), .none):
                 return "Please select at least \(sMin) per section and \(tMin) in total. You can select a maximum of \(max) per section."
             case let (SMAX, TMAX):
-                return "Please select at least \(sMin) per section and \(tMin) in total. You can select a maximum of \(TMAX) per section, and \(SMAX) overall."
+                return "Please select at least \(sMin) per section and \(tMin) in total. You can select a maximum of \(TMAX ?? 0) per section, and \(SMAX ?? 0) overall."
             }
         }
         
