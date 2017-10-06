@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'SelectionViewController'
-  s.version = '1.2'
+  s.version = '1.3'
   s.license = { :type => 'MIT' }
   s.summary = 'Use stack views on iOS 8 & 9.'
   s.homepage = 'https://github.com/thedistance'
